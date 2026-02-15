@@ -1,0 +1,76 @@
+﻿<Window x:Class="Lab_4_TokarevD.N._БПИ_23_01.View.WindowNewEmployee"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab_4_TokarevD.N._БПИ_23_01.View"
+        mc:Ignorable="d"
+        Title="Сотрудник" Height="350" Width="500"
+        WindowStartupLocation="CenterOwner">
+
+    <Window.Resources>
+        
+        <Style x:Key="TextBoxDate" TargetType="TextBox">
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        
+        <Label Content="Фамилия:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Height="26"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" Height="25"/>
+
+        
+        <Label Content="Имя:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Height="26"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" Height="25"/>
+
+        
+        <Label Content="Дата рождения:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Height="26"/>
+
+        
+        <TextBox x:Name="tbBirthday" 
+                 Grid.Row="2" Grid.Column="1" 
+                 Margin="5" Height="25"
+                 Style="{StaticResource TextBoxDate}"
+                 Text="{Binding Birthday}"
+                 IsVisibleChanged="tbBirthday_IsVisibleChanged" />
+
+       
+        <DatePicker x:Name="clBirthday" 
+                    Grid.Row="2" Grid.Column="1" 
+                    Margin="5" Height="25"
+                    Visibility="Hidden"
+                    SelectedDate="{Binding Birthday, StringFormat={}{0:dd.MM.yyyy}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+       
+        <Label Content="Должность:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Height="26"/>
+        <ComboBox x:Name="CbRole" 
+                  Grid.Row="3" Grid.Column="1" 
+                  Margin="5" Height="25"
+                  DisplayMemberPath="NameRole"
+                  SelectedValuePath="Id"/>
+
+       
+        <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+            <Button Content="ОК" Width="75" Height="25" Margin="5" IsDefault="True" Click="Ok_Click"/>
+            <Button Content="Отмена" Width="75" Height="25" Margin="5" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>
